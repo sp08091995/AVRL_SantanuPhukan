@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .wrapper {
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        width: 60%;
+        height: 40%;
+        border: 10px black solid;
+    }
+
+    .bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20%;
+        height: 100%;
+        flex-wrap: nowrap;
+        transition: all .5s;
+    }
+
+    .btncontainer {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+        color: white;
+        font-size: 18px;
+
+    }
+
+    .start:hover {
+        /* outline: none !important; */
+        border: 1px solid rgb(30, 99, 3);
+        /* box-shadow: 0 0 10px #719ECE; */
+    }
+
+    .stop:hover {
+        /* outline: none !important; */
+        border: 1px solid rgb(104, 3, 3);
+        /* box-shadow: 0 0 10px #719ECE; */
+    }
+
+    .active {
+        border: 2px solid black;
+    }
+
+    .start {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: green;
+        cursor: pointer;
+        height: 40px;
+        width: 120px;
+        margin: 0 80px;
+    }
+
+    .stop {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(218, 69, 11);
+        cursor: pointer;
+        height: 40px;
+        width: 120px;
+        margin: 0 80px;
+    }
+
+    .space+.start {
+        margin: 0 40px;
+    }
+
+    #bar1 {
+        background-color: rgb(98, 68, 182);
+    }
+
+    #bar2 {
+        background-color: rgb(216, 120, 200);
+    }
+
+    #bar3 {
+        background-color: rgb(236, 49, 49);
+    }
+
+    #bar4 {
+        background-color: rgb(204, 119, 49);
+    }
+
+    #bar5 {
+        background-color: rgb(251, 255, 0);
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="bar" id="bar1">
+            </div>
+            <div class="bar" id="bar2">
+            </div>
+            <div class="bar" id="bar3">
+            </div>
+            <div class="bar" id="bar4">
+            </div>
+            <div class="bar" id="bar5">
+            </div>
+        </div>
+        <div class="btncontainer">
+            <div id="start" class="start" onclick="startBeater()">
+                Start
+            </div>
+            <div id="stop" class="stop" onclick="stopBeater()">
+                Stop
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    let beat = false;
+
+    const beater = () => {
+
+        if (beat) {
+            for (let i = 1; i < 6; i++) {
+                let rndInt = Math.floor(Math.random() * 100) + 1
+                document.getElementById("bar" + i).style.height = rndInt.toString() + "%";
+            }
+            setTimeout(() => {
+                beater()
+            }, 1000)
+        }
+
+    }
+
+    const startBeater = () => {
+        if (!beat) {
+            document.getElementById("start").classList.add("active")
+            document.getElementById("stop").classList.remove("active")
+            beat = true
+            beater()
+        }
+    }
+
+    const stopBeater = () => {
+        document.getElementById("stop").classList.add("active")
+        document.getElementById("start").classList.remove("active")
+        beat = false
+    }
+
+
+</script>
+
+</html>
